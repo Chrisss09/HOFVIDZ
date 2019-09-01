@@ -6,6 +6,9 @@ from django.contrib.auth import authenticate, login
 from .models import Hall
 
 def home(request):
+    return render(request, 'halls/dashboard.html')
+
+def dashboard(request):
     return render(request, 'halls/home.html')
 
 class SignUp(generic.CreateView):
@@ -30,3 +33,7 @@ class CreateHall(generic.CreateView):
         form.instance.user = self.request.user
         super(CreateHall, self).form_valid(form)
         return redirect('home')
+
+class DetailHall(generic.DetailView):
+    model = Hall
+    template_name = 'halls/detail_hall.html'
